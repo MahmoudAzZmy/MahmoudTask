@@ -2,6 +2,7 @@
 
 namespace Modules\UsersModule\Database\Factories;
 
+use App\Models\AdminGroup;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Modules\UsersModule\App\Http\Model\User;
 
@@ -23,7 +24,8 @@ class UserFactory extends Factory
             'password' => bcrypt('password'),
             'gender' => $this->faker->randomElement(['male', 'female']),
             'account_type' => $this->faker->randomElement(['admin', 'user']),
-            'mobile'    => $this->faker->phoneNumber()
+            'mobile'    => $this->faker->phoneNumber(),
+            'admin_group_id'    => AdminGroup::pluck('id')->random()
         ];
     }
 }

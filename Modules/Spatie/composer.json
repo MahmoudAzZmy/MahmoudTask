@@ -1,0 +1,31 @@
+{
+    "name": "nwidart/spatie",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Spatie\\": "",
+            "Modules\\Spatie\\App\\": "app/",
+            "Modules\\Spatie\\Database\\Factories\\": "database/factories/",
+            "Modules\\Spatie\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Modules\\Spatie\\Tests\\": "tests/"
+        }
+    }
+}

@@ -1,0 +1,6 @@
+{
+    "UsersModule": true,
+    "PermissionsModule": true,
+    "AuthModule": true,
+    "Spatie": true
+}

@@ -1,0 +1,11 @@
+{
+    "name": "Spatie",
+    "alias": "spatie",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Spatie\\App\\Providers\\SpatieServiceProvider"
+    ],
+    "files": []
+}

@@ -11,17 +11,18 @@ class AdminGroupRolesApiResource extends JsonResource
      */
     public function toArray($request): array
     {
+        return parent::toArray($request);
+        // return [
+        //     'id'    => $this->id,
 
-        return [
-            'id'    => $this->id,
-            'permissions'  => [
-                'create'    => $this->create,
-                'show'    => $this->show,
-                'update'    => $this->update,
-                'delete'    => $this->delete,
-                'restore'    => $this->restore,
-                'force_delete'    => $this->force_delete,
-            ]
-        ];
+        //     'permissions'  => [
+        //         'create'    => $this->create,
+        //         'show'    => $this->show,
+        //         'update'    => $this->update,
+        //         'delete'    => $this->delete,
+        //         'restore'    => $this->restore,
+        //         'force_delete'    => $this->force_delete,
+        //     ]
+        // ];
     }
 }

@@ -1,10 +1,10 @@
 <?php
 
-namespace Modules\PermissionsModule\App\Policies;
+namespace Modules\Spatie\App\Policies;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class AdminGroupRolesApiPolicy
+class PermissionPolicy
 {
     use HandlesAuthorization;
 

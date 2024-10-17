@@ -4,25 +4,28 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAdminGroupRolesTable extends Migration {
+class CreateAdminGroupRolesTable extends Migration
+{
 	/**
 	 * Run the migrations.
 	 *
 	 * @return void
 	 */
-	public function up() {
+	public function up()
+	{
 		Schema::create('admin_group_roles', function (Blueprint $table) {
-				$table->uuid('id')->primary();
-				$table->foreignUuid('admin_group_id')->constrained('admin_groups')->references('id')->onDelete('cascade');
-				$table->string('resource');
-				$table->enum('create', ['yes', 'no'])->default('no');
-				$table->enum('show', ['yes', 'no'])->default('no');
-				$table->enum('update', ['yes', 'no'])->default('no');
-				$table->enum('delete', ['yes', 'no'])->default('no');
-				$table->enum('force_delete', ['yes', 'no'])->default('no');
-				$table->enum('restore', ['yes', 'no'])->default('no');
-				$table->timestamps();
-			});
+			$table->uuid('id')->primary();
+			$table->foreignUuid('admin_group_id')->constrained('admin_groups')->references('id')->onDelete('cascade');
+			$table->string('resource');
+			$table->enum('create', ['yes', 'no'])->default('no');
+			$table->enum('show', ['yes', 'no'])->default('no');
+			$table->enum('update', ['yes', 'no'])->default('no');
+			$table->enum('delete', ['yes', 'no'])->default('no');
+			$table->enum('force_delete', ['yes', 'no'])->default('no');
+			$table->enum('restore', ['yes', 'no'])->default('no');
+			$table->softDeletes();
+			$table->timestamps();
+		});
 	}
 
 	/**
@@ -30,7 +33,8 @@ class CreateAdminGroupRolesTable extends Migration {
 	 *
 	 * @return void
 	 */
-	public function down() {
+	public function down()
+	{
 		Schema::dropIfExists('admin_group_roles');
 	}
 }

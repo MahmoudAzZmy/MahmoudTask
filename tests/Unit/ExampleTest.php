@@ -2,15 +2,11 @@
 
 namespace Tests\Unit;
 
-use PHPUnit\Framework\TestCase;
+test('true_is_true', function () {
+    $this->assertTrue(true);
+});
 
-class ExampleTest extends TestCase
-{
-    /**
-     * A basic test example.
-     */
-    public function test_that_true_is_true(): void
-    {
-        $this->assertTrue(true);
-    }
-}
+test('sum', function () {
+    $result = 1+2;
+    expect($result)->toBe(3);
+});

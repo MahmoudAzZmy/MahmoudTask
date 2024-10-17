@@ -5,13 +5,13 @@ namespace Modules\PermissionsModule\App\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\PermissionsModule\Database\Factories\AdminGroupRoleFactory;
 
 class AdminGroupRole extends Model
 {
-	use HasFactory, HasUuids;
+	use HasFactory, HasUuids, SoftDeletes;
 	protected $fillable = [
-		'id',
 		'admin_group_id',
 		'resource',
 		'create',

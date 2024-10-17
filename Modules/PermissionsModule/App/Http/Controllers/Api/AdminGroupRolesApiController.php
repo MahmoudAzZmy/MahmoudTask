@@ -15,10 +15,10 @@ class AdminGroupRolesApiController extends Api
     protected $guard = 'api';
     protected $spatieQueryBuilder = true;
     protected $paginateIndex = true;
-    protected $withTrashed = false;
-    protected $FullJsonInStore = false;  // TRUE,FALSE
-    protected $FullJsonInUpdate = false;  // TRUE,FALSE
-    protected $FullJsonInDestroy = false;  // TRUE,FALSE
+    protected $withTrashed = true;
+    protected $FullJsonInStore = true;  // TRUE,FALSE
+    protected $FullJsonInUpdate = true;  // TRUE,FALSE
+    protected $FullJsonInDestroy = true;  // TRUE,FALSE
 
     /**
      * can handel custom query when retrive data on index,indexGuest
@@ -36,25 +36,15 @@ class AdminGroupRolesApiController extends Api
      */
     public function append(): array
     {
-        // $data = [
-        //     'user_id' => auth('api')->id(),
-        // ];
-        // $file = lynx()->uploadFile('file', 'test');
-        // if (!empty($file)) {
-        //     $data['file'] = $file;
-        // }
-        // return $data;
+
         return [];
     }
 
-    /**
-     * @param $id integer if you want to use in update rules
-     * @param string $type (store,update)
-     * @return array by (store,update) type using $type variable
-     */
+
     public function rules(string $type, mixed $id = null): array
     {
         return $type == 'store' ? [
+            'admin_group_id'    => 'required',
             'resource'         => 'required|string',
             'create'        => 'required',
             'update'        => 'required',
@@ -63,7 +53,8 @@ class AdminGroupRolesApiController extends Api
             'force_delete'  => 'required',
             'restore'       => 'required'
         ] : [
-            'resource'         => 'required|string',
+            'admin_group_id'    => 'required',
+            'resource'         => 'required',
             'create'        => 'required',
             'update'        => 'required',
             'show'          => 'required',
@@ -127,7 +118,7 @@ class AdminGroupRolesApiController extends Api
      */
     public function beforeShow($entity): Object
     {
-        return $entity->where('title', '=', null);
+        return $entity;
     }
 
     /**

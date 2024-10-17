@@ -1,25 +1,24 @@
 <?php
 
-namespace Modules\UsersModule\App\Http\Controllers\Api;
+namespace Modules\Spatie\App\Http\Controllers\Api;
 
 use Lynx\Base\Api;
-use Modules\UsersModule\App\Dash\Resources\Users;
-use Modules\UsersModule\App\Http\Model\User;
-use Modules\UsersModule\App\Policies\UsersApiPolicy;
-use Modules\UsersModule\App\resources\UsersApiResource;
+use Modules\Spatie\App\Models\Permission;
+use Modules\Spatie\App\Policies\PermissionPolicy;
+use Modules\Spatie\App\resources\PermissionResource;
 
-class UsersApiController extends Api
+class PermissionController extends Api
 {
-    protected $entity = User::class;
-    protected $resourcesJson = UsersApiResource::class;
-    protected $policy = UsersApiPolicy::class;
+    protected $entity = Permission::class;
+    protected $resourcesJson = PermissionResource::class;
+    protected $policy = PermissionPolicy::class;
     protected $guard = 'api';
     protected $spatieQueryBuilder = true;
     protected $paginateIndex = true;
-    protected $withTrashed = true;
-    protected $FullJsonInStore = false;  // TRUE,FALSE
-    protected $FullJsonInUpdate = false;  // TRUE,FALSE
-    protected $FullJsonInDestroy = false;  // TRUE,FALSE
+    protected $withTrashed = false;
+    protected $FullJsonInStore = true;  // TRUE,FALSE
+    protected $FullJsonInUpdate = true;  // TRUE,FALSE
+    protected $FullJsonInDestroy = true;  // TRUE,FALSE
 
     /**
      * can handel custom query when retrive data on index,indexGuest
@@ -56,19 +55,11 @@ class UsersApiController extends Api
     public function rules(string $type, mixed $id = null): array
     {
         return $type == 'store' ? [
-            'name' => 'required',
-            'email' => 'required|email',
-            'password' => 'required',
-            'account_type' => 'required',
-            'admin_group_id' => 'required',
-
+            'name'  => 'required',
+            'guard_name'    => 'required'
         ] : [
-            'name' => 'required',
-            'email' => 'required',
-            'password' => 'required',
-            'account_type' => 'required',
-            'admin_group_id' => 'required',
-
+            'name'  => 'required',
+            'guard_name'    => 'required'
         ];
     }
 
@@ -135,7 +126,7 @@ class UsersApiController extends Api
      */
     public function afterShow($entity): Object
     {
-        return new UsersApiResource($entity);
+        return new \Modules\Spatie\App\resources\PermissionResource($entity);
     }
 
     /**

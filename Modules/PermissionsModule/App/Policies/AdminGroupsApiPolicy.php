@@ -34,7 +34,7 @@ class AdminGroupsApiPolicy
 
     public function show()
     {
-        return false;
+        return true;
     }
 
     public function update()

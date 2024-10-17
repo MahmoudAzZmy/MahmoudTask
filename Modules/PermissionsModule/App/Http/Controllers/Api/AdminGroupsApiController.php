@@ -3,20 +3,22 @@
 namespace Modules\PermissionsModule\App\Http\Controllers\Api;
 
 use Lynx\Base\Api;
-use Modules\PermissionsModule\App\Dash\Resources\AdminGroups;
+use Modules\PermissionsModule\App\Model\AdminGroup;
+use Modules\PermissionsModule\App\Policies\AdminGroupsApiPolicy;
+use Modules\PermissionsModule\App\resources\AdminGroupsApiResource;
 
 class AdminGroupsApiController extends Api
 {
-    protected $entity = AdminGroups::class;
-    protected $resourcesJson = \Modules\PermissionsModule\App\resources\AdminGroupsApiResource::class;
-    protected $policy = \Modules\PermissionsModule\App\Policies\AdminGroupsApiPolicy::class;
+    protected $entity = AdminGroup::class;
+    protected $resourcesJson = AdminGroupsApiResource::class;
+    protected $policy = AdminGroupsApiPolicy::class;
     protected $guard = 'api';
     protected $spatieQueryBuilder = true;
     protected $paginateIndex = true;
-    protected $withTrashed = false;
-    protected $FullJsonInStore = false;  // TRUE,FALSE
-    protected $FullJsonInUpdate = false;  // TRUE,FALSE
-    protected $FullJsonInDestroy = false;  // TRUE,FALSE
+    protected $withTrashed = true;
+    protected $FullJsonInStore = true;  // TRUE,FALSE
+    protected $FullJsonInUpdate = true;  // TRUE,FALSE
+    protected $FullJsonInDestroy = true;  // TRUE,FALSE
 
     /**
      * can handel custom query when retrive data on index,indexGuest
@@ -25,7 +27,7 @@ class AdminGroupsApiController extends Api
      */
     public function query($entity): Object
     {
-        return $entity->where('id', 1)->withTrashed();
+        return $entity;
     }
 
     /**
@@ -53,9 +55,9 @@ class AdminGroupsApiController extends Api
     public function rules(string $type, mixed $id = null): array
     {
         return $type == 'store' ? [
-            'title'  => 'required|string',
+            'name'  => 'required|string',
         ] : [
-            'title'  => 'required|string',
+            'name'  => 'required|string',
         ];
     }
 
@@ -113,7 +115,7 @@ class AdminGroupsApiController extends Api
      */
     public function beforeShow($entity): Object
     {
-        return $entity->where('title', '=', null);
+        return $entity;
     }
 
     /**
